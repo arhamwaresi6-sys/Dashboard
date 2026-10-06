@@ -1,0 +1,554 @@
+/* ==================================================
+   RESET
+   ================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  background: #f5f5f5;
+  color: #111;
+
+  min-height: 100vh;
+}
+
+/* ==================================================
+   DASHBOARD
+   ================================================== */
+
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ==================================================
+   SIDEBAR
+   ================================================== */
+
+.sidebar {
+  width: 240px;
+  background: #111;
+  color: white;
+
+  padding: 24px 16px;
+
+  display: flex;
+  flex-direction: column;
+
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 4px 10px 32px;
+
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.brand-icon {
+  width: 36px;
+  height: 36px;
+
+  background: white;
+  color: #111;
+
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 800;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.nav-link {
+  color: #aaa;
+  text-decoration: none;
+
+  padding: 12px 14px;
+
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  font-size: 14px;
+
+  transition: 0.2s ease;
+}
+
+.nav-link:hover {
+  background: #1d1d1d;
+  color: white;
+}
+
+.nav-link.active {
+  background: white;
+  color: #111;
+}
+
+.nav-icon {
+  width: 20px;
+  text-align: center;
+  font-size: 17px;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ==================================================
+   MAIN
+   ================================================== */
+
+.main {
+  margin-left: 240px;
+  width: calc(100% - 240px);
+}
+
+/* ==================================================
+   TOPBAR
+   ================================================== */
+
+.topbar {
+  height: 76px;
+
+  background: white;
+  border-bottom: 1px solid #e8e8e8;
+
+  padding: 0 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-brand {
+  display: none;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.icon-button,
+.menu-button {
+  border: none;
+  background: transparent;
+
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.menu-button {
+  display: none;
+}
+
+.user-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-avatar {
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  background: #111;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 700;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.user-info strong {
+  font-size: 14px;
+}
+
+.user-info span {
+  color: #888;
+  font-size: 12px;
+}
+
+/* ==================================================
+   CONTENT
+   ================================================== */
+
+.content {
+  padding: 36px;
+  max-width: 1400px;
+}
+
+.page-heading {
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+
+  color: #777;
+
+  margin-bottom: 8px;
+}
+
+.page-heading h1 {
+  font-size: 30px;
+  letter-spacing: -0.7px;
+}
+
+.subtitle {
+  margin-top: 8px;
+  color: #777;
+  font-size: 14px;
+}
+
+/* ==================================================
+   CARDS
+   ================================================== */
+
+.card {
+  background: white;
+
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+
+  padding: 26px;
+}
+
+.card-header {
+  margin-bottom: 25px;
+}
+
+.card-header h2 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.card-header p {
+  color: #888;
+  font-size: 13px;
+}
+
+/* ==================================================
+   SETTINGS GRID
+   ================================================== */
+
+.settings-grid {
+  display: grid;
+
+  grid-template-columns: 1.15fr 0.85fr;
+
+  gap: 20px;
+}
+
+/* ==================================================
+   PROFILE
+   ================================================== */
+
+.profile-top {
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  padding-bottom: 25px;
+
+  border-bottom: 1px solid #eee;
+}
+
+.large-avatar {
+  width: 68px;
+  height: 68px;
+
+  border-radius: 16px;
+
+  background: #111;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.profile-top h3 {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.role {
+  display: inline-block;
+
+  background: #f0f0f0;
+
+  border-radius: 20px;
+
+  padding: 5px 10px;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.info-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 22px;
+
+  margin-top: 25px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.info-item span {
+  color: #888;
+  font-size: 12px;
+}
+
+.info-item strong {
+  font-size: 14px;
+
+  overflow-wrap: anywhere;
+}
+
+/* ==================================================
+   SECURITY
+   ================================================== */
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  margin-bottom: 8px;
+}
+
+.form-group input {
+  width: 100%;
+
+  height: 44px;
+
+  border: 1px solid #ddd;
+  border-radius: 10px;
+
+  padding: 0 13px;
+
+  font-size: 13px;
+
+  outline: none;
+
+  transition: 0.2s ease;
+}
+
+.form-group input:focus {
+  border-color: #111;
+}
+
+.save-button {
+  width: 100%;
+
+  height: 44px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #111;
+  color: white;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.save-button:hover {
+  background: #292929;
+}
+
+.message {
+  margin-top: 12px;
+
+  font-size: 12px;
+  text-align: center;
+
+  min-height: 18px;
+}
+
+/* ==================================================
+   ACCOUNT
+   ================================================== */
+
+.account-card {
+  margin-top: 20px;
+}
+
+.account-row {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+.account-row > div {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.account-row span {
+  color: #888;
+  font-size: 12px;
+}
+
+.account-row strong {
+  font-size: 14px;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.status::before {
+  content: "";
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #111;
+}
+
+/* ==================================================
+   RESPONSIVE
+   ================================================== */
+
+@media (max-width: 1000px) {
+  .sidebar {
+    width: 210px;
+  }
+
+  .main {
+    margin-left: 210px;
+    width: calc(100% - 210px);
+  }
+
+  .settings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .sidebar {
+    display: none;
+  }
+
+  .main {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .topbar {
+    padding: 0 18px;
+  }
+
+  .mobile-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .mobile-brand .brand-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .menu-button {
+    display: block;
+  }
+
+  .user-info {
+    display: none;
+  }
+
+  .content {
+    padding: 24px 18px;
+  }
+
+  .page-heading h1 {
+    font-size: 25px;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .account-row {
+    grid-template-columns: 1fr;
+  }
+}

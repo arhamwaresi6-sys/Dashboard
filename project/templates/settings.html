@@ -1,0 +1,324 @@
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Settings | Dashboard</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/settings.css') }}"
+    />
+  </head>
+
+  <body>
+    <div class="dashboard">
+
+      <!-- ================= SIDEBAR ================= -->
+      <aside class="sidebar">
+
+        <div class="brand">
+          <div class="brand-icon">D</div>
+          <span>Dashboard</span>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="/" class="nav-link">
+            <span class="nav-icon">⌂</span>
+            <span>Overview</span>
+          </a>
+
+          <a href="/table" class="nav-link">
+            <span class="nav-icon">▦</span>
+            <span>Table</span>
+          </a>
+
+          <a href="/products" class="nav-link">
+            <span class="nav-icon">□</span>
+            <span>Products</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+
+          <a href="/settings" class="nav-link active">
+            <span class="nav-icon">⚙</span>
+            <span>Settings</span>
+          </a>
+
+          <a href="/logout" class="nav-link logout-link">
+            <span class="nav-icon">↪</span>
+            <span>Logout</span>
+          </a>
+
+        </div>
+      </aside>
+
+
+      <!-- ================= MAIN ================= -->
+      <main class="main">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+          <div class="mobile-brand">
+            <div class="brand-icon">D</div>
+            <span>Dashboard</span>
+          </div>
+
+          <div></div>
+
+          <div class="topbar-right">
+
+            <button class="icon-button" id="notificationBtn">
+              ♢
+            </button>
+
+            <div class="user-area">
+
+              <div class="user-avatar">
+                {{ current_user.name[0].upper()
+                if current_user.is_authenticated and current_user.name
+                else "A" }}
+              </div>
+
+              <div class="user-info">
+                <strong>
+                  {{ current_user.name
+                  if current_user.is_authenticated
+                  else "Admin" }}
+                </strong>
+
+                <span>Administrator</span>
+              </div>
+
+            </div>
+
+            <button class="menu-button" id="menuButton">
+              ☰
+            </button>
+
+          </div>
+        </header>
+
+
+        <!-- ================= CONTENT ================= -->
+        <section class="content">
+
+          <div class="page-heading">
+
+            <div>
+              <p class="eyebrow">SETTINGS</p>
+
+              <h1>Admin Settings</h1>
+
+              <p class="subtitle">
+                Manage your administrator account and security.
+              </p>
+            </div>
+
+          </div>
+
+
+          <!-- ================= ADMIN PROFILE ================= -->
+          <div class="settings-grid">
+
+            <div class="card profile-card">
+
+              <div class="card-header">
+                <div>
+                  <h2>Admin Information</h2>
+                  <p>Your administrator account details.</p>
+                </div>
+              </div>
+
+
+              <div class="profile-top">
+
+                <div class="large-avatar">
+                  {{ current_user.name[0].upper()
+                  if current_user.name else "A" }}
+                </div>
+
+                <div>
+                  <h3>
+                    {{ current_user.name }}
+                  </h3>
+
+                  <span class="role">
+                    Administrator
+                  </span>
+                </div>
+
+              </div>
+
+
+              <div class="info-grid">
+
+                <div class="info-item">
+                  <span>Name</span>
+                  <strong>
+                    {{ current_user.name }}
+                  </strong>
+                </div>
+
+                <div class="info-item">
+                  <span>Email</span>
+                  <strong>
+                    {{ current_user.email }}
+                  </strong>
+                </div>
+
+                <div class="info-item">
+                  <span>Admin ID</span>
+                  <strong>
+                    #{{ current_user.id }}
+                  </strong>
+                </div>
+
+                <div class="info-item">
+                  <span>Account Created</span>
+                  <strong>
+                    {{ current_user.created_at.strftime("%d %b %Y")
+                    if current_user.created_at else "Unknown" }}
+                  </strong>
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- ================= SECURITY ================= -->
+            <div class="card security-card">
+
+              <div class="card-header">
+                <div>
+                  <h2>Security</h2>
+                  <p>Update your administrator password.</p>
+                </div>
+              </div>
+
+
+              <form id="passwordForm">
+
+                <div class="form-group">
+
+                  <label for="currentPassword">
+                    Current Password
+                  </label>
+
+                  <input
+                    type="password"
+                    id="currentPassword"
+                    name="current_password"
+                    placeholder="Enter current password"
+                    required
+                  />
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label for="newPassword">
+                    New Password
+                  </label>
+
+                  <input
+                    type="password"
+                    id="newPassword"
+                    name="new_password"
+                    placeholder="Enter new password"
+                    required
+                  />
+
+                </div>
+
+
+                <div class="form-group">
+
+                  <label for="confirmPassword">
+                    Confirm New Password
+                  </label>
+
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirm_password"
+                    placeholder="Confirm new password"
+                    required
+                  />
+
+                </div>
+
+
+                <button type="submit" class="save-button">
+                  Update Password
+                </button>
+
+                <p id="passwordMessage" class="message"></p>
+
+              </form>
+
+            </div>
+
+          </div>
+
+
+          <!-- ================= ACCOUNT ================= -->
+          <div class="card account-card">
+
+            <div class="card-header">
+
+              <div>
+                <h2>Account</h2>
+                <p>Information about your administrator account.</p>
+              </div>
+
+            </div>
+
+            <div class="account-row">
+
+              <div>
+                <span>Account status</span>
+                <strong class="status">
+                  Active
+                </strong>
+              </div>
+
+              <div>
+                <span>Account type</span>
+                <strong>
+                  Administrator
+                </strong>
+              </div>
+
+              <div>
+                <span>Member since</span>
+                <strong>
+                  {{ current_user.created_at.strftime("%d %B %Y")
+                  if current_user.created_at else "Unknown" }}
+                </strong>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </main>
+
+    </div>
+
+
+    <script
+      src="{{ url_for('static', filename='js/settings.js') }}">
+    </script>
+
+  </body>
+</html>
+```

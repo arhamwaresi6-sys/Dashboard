@@ -1,9 +1,10 @@
-from flask import Blueprint,render_template,redirect,request
+from flask import Blueprint,render_template,redirect,request,jsonify
 from flask_login import current_user
 from project.modules import Customer,Order,Product
 from project.extentions import db
 from datetime import datetime
 from flask_login import login_required
+from werkzeug.security import check_password_hash, generate_password_hash
 main = Blueprint('main', __name__)
 @main.route('/')
 @login_required
@@ -278,3 +279,43 @@ def table():
 @main.route('/products')
 def products():
     return render_template("products.html",current_user=current_user)
+@main.route('/settings')
+def settings():
+    return render_template("settings.html")
+@main.route("/settings/password", methods=["POST"])
+@login_required
+def change_password():
+
+    data = request.get_json()
+
+    current_password = data.get("current_password")
+    new_password = data.get("new_password")
+
+
+    if not current_password or not new_password:
+        return jsonify({
+            "error": "All fields are required."
+        }), 400
+
+
+    # Check old password
+    if not check_password_hash(
+        current_user.password_hash,
+        current_password
+    ):
+        return jsonify({
+            "error": "Current password is incorrect."
+        }), 401
+
+
+    # Save new password hash
+    current_user.password_hash = generate_password_hash(
+        new_password
+    )
+
+    db.session.commit()
+
+
+    return jsonify({
+        "message": "Password updated successfully."
+    }), 200
