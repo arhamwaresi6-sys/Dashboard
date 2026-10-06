@@ -1,4 +1,3 @@
-```html
 <!doctype html>
 <html lang="en">
   <head>
@@ -15,10 +14,8 @@
 
   <body>
     <div class="dashboard">
-
       <!-- ================= SIDEBAR ================= -->
       <aside class="sidebar">
-
         <div class="brand">
           <div class="brand-icon">D</div>
           <span>Dashboard</span>
@@ -42,7 +39,6 @@
         </nav>
 
         <div class="sidebar-bottom">
-
           <a href="/settings" class="nav-link active">
             <span class="nav-icon">⚙</span>
             <span>Settings</span>
@@ -52,17 +48,13 @@
             <span class="nav-icon">↪</span>
             <span>Logout</span>
           </a>
-
         </div>
       </aside>
 
-
       <!-- ================= MAIN ================= -->
       <main class="main">
-
         <!-- TOPBAR -->
         <header class="topbar">
-
           <div class="mobile-brand">
             <div class="brand-icon">D</div>
             <span>Dashboard</span>
@@ -71,44 +63,31 @@
           <div></div>
 
           <div class="topbar-right">
-
-            <button class="icon-button" id="notificationBtn">
-              ♢
-            </button>
+            <button class="icon-button" id="notificationBtn">♢</button>
 
             <div class="user-area">
-
               <div class="user-avatar">
-                {{ current_user.name[0].upper()
-                if current_user.is_authenticated and current_user.name
-                else "A" }}
+                {{ current_user.name[0].upper() if current_user.is_authenticated
+                and current_user.name else "A" }}
               </div>
 
               <div class="user-info">
                 <strong>
-                  {{ current_user.name
-                  if current_user.is_authenticated
-                  else "Admin" }}
+                  {{ current_user.name if current_user.is_authenticated else
+                  "Admin" }}
                 </strong>
 
                 <span>Administrator</span>
               </div>
-
             </div>
 
-            <button class="menu-button" id="menuButton">
-              ☰
-            </button>
-
+            <button class="menu-button" id="menuButton">☰</button>
           </div>
         </header>
 
-
         <!-- ================= CONTENT ================= -->
         <section class="content">
-
           <div class="page-heading">
-
             <div>
               <p class="eyebrow">SETTINGS</p>
 
@@ -118,15 +97,11 @@
                 Manage your administrator account and security.
               </p>
             </div>
-
           </div>
-
 
           <!-- ================= ADMIN PROFILE ================= -->
           <div class="settings-grid">
-
             <div class="card profile-card">
-
               <div class="card-header">
                 <div>
                   <h2>Admin Information</h2>
@@ -134,66 +109,47 @@
                 </div>
               </div>
 
-
               <div class="profile-top">
-
                 <div class="large-avatar">
-                  {{ current_user.name[0].upper()
-                  if current_user.name else "A" }}
+                  {{ current_user.name[0].upper() if current_user.name else "A"
+                  }}
                 </div>
 
                 <div>
-                  <h3>
-                    {{ current_user.name }}
-                  </h3>
+                  <h3>{{ current_user.name }}</h3>
 
-                  <span class="role">
-                    Administrator
-                  </span>
+                  <span class="role"> Administrator </span>
                 </div>
-
               </div>
 
-
               <div class="info-grid">
-
                 <div class="info-item">
                   <span>Name</span>
-                  <strong>
-                    {{ current_user.name }}
-                  </strong>
+                  <strong> {{ current_user.name }} </strong>
                 </div>
 
                 <div class="info-item">
                   <span>Email</span>
-                  <strong>
-                    {{ current_user.email }}
-                  </strong>
+                  <strong> {{ current_user.email }} </strong>
                 </div>
 
                 <div class="info-item">
                   <span>Admin ID</span>
-                  <strong>
-                    #{{ current_user.id }}
-                  </strong>
+                  <strong> #{{ current_user.id }} </strong>
                 </div>
 
                 <div class="info-item">
                   <span>Account Created</span>
                   <strong>
-                    {{ current_user.created_at.strftime("%d %b %Y")
-                    if current_user.created_at else "Unknown" }}
+                    {{ current_user.created_at.strftime("%d %b %Y") if
+                    current_user.created_at else "Unknown" }}
                   </strong>
                 </div>
-
               </div>
-
             </div>
-
 
             <!-- ================= SECURITY ================= -->
             <div class="card security-card">
-
               <div class="card-header">
                 <div>
                   <h2>Security</h2>
@@ -201,14 +157,9 @@
                 </div>
               </div>
 
-
               <form id="passwordForm">
-
                 <div class="form-group">
-
-                  <label for="currentPassword">
-                    Current Password
-                  </label>
+                  <label for="currentPassword"> Current Password </label>
 
                   <input
                     type="password"
@@ -217,15 +168,10 @@
                     placeholder="Enter current password"
                     required
                   />
-
                 </div>
 
-
                 <div class="form-group">
-
-                  <label for="newPassword">
-                    New Password
-                  </label>
+                  <label for="newPassword"> New Password </label>
 
                   <input
                     type="password"
@@ -234,15 +180,10 @@
                     placeholder="Enter new password"
                     required
                   />
-
                 </div>
 
-
                 <div class="form-group">
-
-                  <label for="confirmPassword">
-                    Confirm New Password
-                  </label>
+                  <label for="confirmPassword"> Confirm New Password </label>
 
                   <input
                     type="password"
@@ -251,74 +192,51 @@
                     placeholder="Confirm new password"
                     required
                   />
-
                 </div>
-
 
                 <button type="submit" class="save-button">
                   Update Password
                 </button>
 
                 <p id="passwordMessage" class="message"></p>
-
               </form>
-
             </div>
-
           </div>
-
 
           <!-- ================= ACCOUNT ================= -->
           <div class="card account-card">
-
             <div class="card-header">
-
               <div>
                 <h2>Account</h2>
                 <p>Information about your administrator account.</p>
               </div>
-
             </div>
 
             <div class="account-row">
-
               <div>
                 <span>Account status</span>
-                <strong class="status">
-                  Active
-                </strong>
+                <strong class="status"> Active </strong>
               </div>
 
               <div>
                 <span>Account type</span>
-                <strong>
-                  Administrator
-                </strong>
+                <strong> Administrator </strong>
               </div>
 
               <div>
                 <span>Member since</span>
                 <strong>
-                  {{ current_user.created_at.strftime("%d %B %Y")
-                  if current_user.created_at else "Unknown" }}
+                  {{ current_user.created_at.strftime("%d %B %Y") if
+                  current_user.created_at else "Unknown" }}
                 </strong>
               </div>
-
             </div>
-
           </div>
-
         </section>
-
       </main>
-
     </div>
 
-
-    <script
-      src="{{ url_for('static', filename='js/settings.js') }}">
-    </script>
-
+    <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
   </body>
 </html>
 ```
