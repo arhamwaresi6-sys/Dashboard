@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Dashboard</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body>
+    <div class="dashboard">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-icon">D</div>
+          <span>Dashboard</span>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="#" class="nav-link active">
+            <span class="nav-icon">⌂</span>
+            <span>Overview</span>
+          </a>
+
+          <a href="/table" class="nav-link">
+            <span class="nav-icon">▦</span>
+            <span>Table</span>
+          </a>
+
+          <a href="/products" class="nav-link">
+            <span class="nav-icon">□</span>
+            <span>Products</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <a href="/settings" class="nav-link">
+            <span class="nav-icon">⚙</span>
+            <span>Settings</span>
+          </a>
+
+          <a href="/logout" class="nav-link logout-link">
+            <span class="nav-icon">↪</span>
+            <span>Logout</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <main class="main">
+        <!-- Topbar -->
+        <header class="topbar">
+          <div class="mobile-brand">
+            <div class="brand-icon">D</div>
+            <span>Dashboard</span>
+          </div>
+
+          <div class="table-search-wrapper">
+            <div class="table-search">
+              <span>⌕</span>
+
+              <input
+                type="text"
+                id="orderSearch"
+                placeholder="Search customers..."
+                autocomplete="off"
+              />
+            </div>
+
+            <!-- SEARCH SUGGESTIONS -->
+
+            <div class="search-suggestions" id="searchSuggestions"></div>
+          </div>
+
+          <div class="topbar-right">
+            <button class="icon-button" id="notificationBtn">♢</button>
+
+            <div class="user-area">
+              <div class="user-avatar">
+                {{ current_user.name[0].upper() if current_user.is_authenticated
+                and current_user.name else "A" }}
+              </div>
+
+              <div class="user-info">
+                <strong>
+                  {{ current_user.name if current_user.is_authenticated else
+                  "Admin" }}
+                </strong>
+
+                <span>Administrator</span>
+              </div>
+            </div>
+
+            <button class="menu-button" id="menuButton">☰</button>
+          </div>
+        </header>
+
+        <!-- Content -->
+        <section class="content">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">OVERVIEW</p>
+              <h1>
+                Good morning, {{ current_user.name if
+                current_user.is_authenticated else "Admin" }}
+              </h1>
+
+              <p class="subtitle">
+                Here's what's happening with your business today.
+              </p>
+            </div>
+
+            <div class="date-box" id="currentDate"></div>
+          </div>
+
+          <!-- Stats -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-top">
+                <span>Total Users</span>
+                <span class="stat-icon">♙</span>
+              </div>
+
+              <h2>{{total_customer}}</h2>
+
+              <div class="stat-bottom">
+                <span class="positive"
+                  >+{{"%.1f"|format(customer_increased)}}%</span
+                >
+                <span>vs last month</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-top">
+                <span>Total Orders</span>
+                <span class="stat-icon">▤</span>
+              </div>
+
+              <h2>{{total_orders}}</h2>
+
+              <div class="stat-bottom">
+                <span class="positive"
+                  >+{{"%.1f"|format(order_increased)}}%%</span
+                >
+                <span>vs last month</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-top">
+                <span>Total Revenue</span>
+                <span class="stat-icon">$</span>
+              </div>
+
+              <h2>${{revenue}}</h2>
+
+              <div class="stat-bottom">
+                <span class="positive"
+                  >+{{"%.1f"|format(revenue_increased)}}%%</span
+                >
+                <span>vs last month</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-top">
+                <span>Total Revenue This Year</span>
+                <span class="stat-icon">$</span>
+              </div>
+
+              <h2>${{revenue_this_year}}</h2>
+            </div>
+          </div>
+
+          <!-- Charts -->
+          <div class="charts-grid">
+            <!-- Sales -->
+            <div class="card sales-card">
+              <div class="card-header">
+                <div>
+                  <h3>Sales Overview</h3>
+                  <p>Monthly sales performance</p>
+                </div>
+
+                <p>Last 7 months</p>
+              </div>
+
+              <div class="chart-container">
+                <canvas id="salesChart"></canvas>
+              </div>
+            </div>
+
+            <!-- Orders -->
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3>Order Status</h3>
+                  <p>Current order distribution</p>
+                </div>
+              </div>
+
+              <div class="donut-container">
+                <canvas id="orderChart"></canvas>
+              </div>
+
+              <div class="legend">
+                <div>
+                  <span class="legend-dot dark"></span>
+                  Completed
+                  <strong>{{pie_data[0]}}%</strong>
+                </div>
+
+                <div>
+                  <span class="legend-dot medium"></span>
+                  Processing
+                  <strong>{{pie_data[1]}}%</strong>
+                </div>
+
+                <div>
+                  <span class="legend-dot light"></span>
+                  Cancelled
+                  <strong>{{pie_data[2]}}%</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Revenue + Activity -->
+          <div class="bottom-grid">
+            <div class="card revenue-card">
+              <div class="card-header">
+                <div>
+                  <h3>Revenue Trend</h3>
+                  <p>Revenue during the year</p>
+                </div>
+              </div>
+
+              <div class="chart-container">
+                <canvas id="revenueChart"></canvas>
+              </div>
+            </div>
+          </div>
+          <!-- Top Products -->
+          <div class="products-section">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">PRODUCTS</p>
+                <h2>Top Products</h2>
+                <p>Best performing products.</p>
+              </div>
+            </div>
+
+            <div class="products-grid">
+              <!-- Product 1 -->
+              {%for product in top_3_products%}
+              <div class="product-card">
+                <div class="product-image">{{ product.initials.upper() }}</div>
+
+                <div class="product-info">
+                  <div class="product-title">
+                    <div>
+                      <h3>{{product.name}}</h3>
+                      <span>{{product.category}}</span>
+                    </div>
+
+                    <strong>#{{loop.index}}</strong>
+                  </div>
+
+                  <div class="product-stats">
+                    <div>
+                      <span>Revenue</span>
+                      <strong>{{product.total_revenue}}</strong>
+                    </div>
+                  </div>
+
+                  <div class="product-progress">
+                    <div class="progress-label">
+                      <span>Performance</span>
+                      <span>{{product.goal_percentage}}%</span>
+                    </div>
+
+                    <div class="progress">
+                      <div style="width: {{product.goal_percentage}}%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {%endfor%}
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+      boxChart({{ boxChartData | tojson }});
+      graph({{ boxChartData | tojson }});
+      pieChart({{ pie_data | tojson }});
+    </script>
+  </body>
+</html>

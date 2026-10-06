@@ -1,0 +1,8 @@
+import os
+SQLALCHEMY_DATABASE_URI = os.getenv("SQLALCHEMY_DATABASE_URI")
+SUPABASE_URL=os.getenv("SUPABASE_URL")
+SUPABASE_KEY=os.getenv("SUPABASE_KEY")
+SECRET_KEY=os.getenv("SECRET_KEY")
+ADMIN_CODE=os.getenv("ADMIN_CODE")
+SUPABASE_BUCKET = "New Bucket"
+SUPABASE_FOLDER = "product_picture"
